@@ -79,12 +79,12 @@ const resetBoard = () => {
 // When is this function called? What should it do with its argument?
 const towersOfHanoi = (startStack, endStack) => {
   // Your code here
-  printStacks()
   isLegal(startStack, endStack)
-  if (isLegal) {
+  if (isLegal(startStack, endStack) == true) {
     movePiece(startStack, endStack)
     checkForWin()
   } else {
+    console.log("That is not a legal move.")
     getPrompt()
   }
 }
@@ -94,8 +94,7 @@ const getPrompt = () => {
   rl.question("start stack: ", startStack => {
     rl.question("end stack: ", endStack => {
       isValidInput(startStack, endStack)
-      console.log(isValidInput())
-      if (isValidInput() == true) {
+      if (isValidInput(startStack, endStack) == true) {
         towersOfHanoi(startStack, endStack)
         getPrompt()
       } else {
