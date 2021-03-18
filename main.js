@@ -23,14 +23,14 @@ let stacks = {
   c: []
 }
 
-// Start here. What is this function doing?
+// This function shows the user what the board currently looks like. It updates after every time a move is made.
 const printStacks = () => {
   console.log("a: " + stacks.a)
   console.log("b: " + stacks.b)
   console.log("c: " + stacks.c)
 }
 
-// Next, what do you think this function should do?
+// This function move the piece from one array to another. It only runs if the conditions of valid entry and legal move have been made. It always removes the last index in the array.
 const movePiece = (startStack, endStack) => {
   // Your code here
   stacks[endStack].push(stacks[startStack][stacks[startStack].length - 1])
@@ -38,6 +38,7 @@ const movePiece = (startStack, endStack) => {
 }
 
 // Before you move, should you check if the move it actually allowed? Should 3 be able to be stacked on 2
+// This function checks if the move is legal or not, it returns true or false, which will then continue the towersOfHanoi function and another conditional will be run either allowing the move or rejecting and telling the user that the move is not legal.
 const isLegal = (startStack, endStack) => {
   // Your code here
   if (stacks[startStack][startStack.length - 1] < stacks[endStack][endStack.length - 1] || stacks[endStack] == 0) {
@@ -47,6 +48,7 @@ const isLegal = (startStack, endStack) => {
   }
 }
 
+// This function checks for a valid input. If input is valid the towersOfHanoi function will run with the user input in each parameter.
 const isValidInput = (startStack, endStack) => {
   if ((startStack == "a" || startStack == "b" || startStack == "c") && (endStack == "a" || endStack == "b" || endStack == "c")) {
     return true
@@ -55,7 +57,7 @@ const isValidInput = (startStack, endStack) => {
   }
 }
 
-// What is a win in Towers of Hanoi? When should this function run?
+// This function runs after a move has been made. If a win condition is met, the user will receive a victory message and the board will be reset. The game will restart by invoking the resetBoard function.
 const checkForWin = () => {
   // Your code here
   if (stacks.b.length == 4 || stacks.c.length == 4) {
@@ -68,6 +70,7 @@ const checkForWin = () => {
   }
 }
 
+//This function resets the board to it's default value. It runs when a win condition has been met.
 const resetBoard = () => {
   stacks = {
     a: [4, 3, 2, 1],
@@ -76,7 +79,7 @@ const resetBoard = () => {
   }
 }
 
-// When is this function called? What should it do with its argument?
+// This function contains most of the other functions that will run over the course of this game. It controls the flow of the game and checks the logic for if the game should continue or not.
 const towersOfHanoi = (startStack, endStack) => {
   // Your code here
   isLegal(startStack, endStack)
@@ -89,6 +92,7 @@ const towersOfHanoi = (startStack, endStack) => {
   }
 }
 
+// This function sets the prompt for the user and asks for their input. It repeats every time after a move is made or if an invalid entry was made by the user.
 const getPrompt = () => {
   printStacks()
   rl.question("start stack: ", startStack => {
